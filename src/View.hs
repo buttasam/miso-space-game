@@ -33,7 +33,7 @@ rootBase content = div_ [] [ svg_ [ height_ $ px screenSize
 
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
-viewModel (Started ship score) = rootBase [ text_ [ x_ $ px 10
+viewModel (Started ship score enemies) = rootBase [ text_ [ x_ $ px 10
                                         , y_ $ px 20
                                         , textStyle
                                         ] [ text scoreText],

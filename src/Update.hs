@@ -19,9 +19,9 @@ updateModel :: Action -> Model -> Effect Action Model
 updateModel NoOp m = noEff m
 updateModel InitAction m = m <# do
   putStrLn "Test" >> pure NoOp
-updateModel (Tick _) m@(Started ship score) =
-  noEff $ m {ship = ship, score = score + 1}
-updateModel (KeyboardPress keys) m@(Started ship score)
+updateModel (Tick _) m@(Started ship score enemies) =
+  noEff $ m {ship = ship, score = score + 1, enemies = enemies}
+updateModel (KeyboardPress keys) m@(Started ship score _)
   | Set.member 39 keys = noEff $ (moveShipLeft m)
   | Set.member 37 keys = noEff $ (moveShipRight m)
   | Set.member 40 keys = noEff $ (moveShipDown m)

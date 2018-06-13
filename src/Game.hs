@@ -3,16 +3,16 @@ module Game where
 import Model
 
 moveShipLeft :: Model -> Model
-moveShipLeft m@(Started ship score) = m { ship = (sanitizeEdges (fst ship) shipSpeed, (snd ship)), score = score }
+moveShipLeft m@(Started ship score enemies) = m { ship = (sanitizeEdges (fst ship) shipSpeed, (snd ship)), score = score, enemies = enemies }
 
 moveShipRight :: Model -> Model
-moveShipRight  m@(Started ship score) = m { ship = (sanitizeEdges (fst ship) (-shipSpeed), (snd ship)), score = score }
+moveShipRight  m@(Started ship score enemies) = m { ship = (sanitizeEdges (fst ship) (-shipSpeed), (snd ship)), score = score, enemies = enemies }
 
 moveShipUp :: Model -> Model
-moveShipUp m@(Started ship score) = m { ship = ((fst ship), sanitizeEdges (snd ship) (-shipSpeed)), score = score }
+moveShipUp m@(Started ship score enemies) = m { ship = ((fst ship), sanitizeEdges (snd ship) (-shipSpeed)), score = score, enemies = enemies }
 
 moveShipDown :: Model -> Model
-moveShipDown m@(Started ship score) = m { ship = ((fst ship), sanitizeEdges (snd ship) shipSpeed), score = score }
+moveShipDown m@(Started ship score enemies) = m { ship = ((fst ship), sanitizeEdges (snd ship) shipSpeed), score = score, enemies = enemies }
 
 
 sanitizeEdges :: Integer -> Integer -> Integer

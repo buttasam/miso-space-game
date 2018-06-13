@@ -5,7 +5,8 @@ data Model
   = NotStarted
   | Started
     { ship :: Ship,
-      score :: Integer
+      score :: Integer,
+      enemies :: [Ship]
     }
   deriving (Show, Eq)
 
