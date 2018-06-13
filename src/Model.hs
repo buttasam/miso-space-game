@@ -11,9 +11,16 @@ data Model
 
 type Ship = (Integer, Integer)
 
-
+-- | Define constants and init data
 initShip :: Ship
-initShip = (400, 400)
+initShip = ((screenSize `div` 2) - halfOfShip, screenSize - 3 * halfOfShip)
+    where halfOfShip = shipSize `div` 2
 
 initScore :: Integer
 initScore = 0
+
+screenSize :: Integer
+screenSize = 600
+
+shipSize :: Integer
+shipSize = 30

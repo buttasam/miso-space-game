@@ -2,8 +2,6 @@ module Game where
 
 import Model
 
-screenSize = 600
-
 moveShipLeft :: Model -> Model
 moveShipLeft m@(Started ship score) = m { ship = ((fst ship) + 1, (snd ship)), score = score }
 

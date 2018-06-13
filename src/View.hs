@@ -24,12 +24,12 @@ px e = ms $ show e ++ "px"
 
 -- | Render a model
 rootBase :: [View a] -> View a
-rootBase content = div_ [] [ svg_ [ height_ $ px 600
-                                  , width_ $ px 600
+rootBase content = div_ [] [ svg_ [ height_ $ px screenSize
+                                  , width_ $ px screenSize
                                   ] [ g_  [] (bg : content) ]
                            ]
   where
-    bg = rect_ [ width_ (px 600), height_ (px 600) ] []
+    bg = rect_ [ width_ (px screenSize), height_ (px screenSize) ] []
 
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
@@ -38,11 +38,11 @@ viewModel (Started ship score) = rootBase [ text_ [ x_ $ px 10
                                         , textStyle
                                         ] [ text scoreText],
 
-                                        rect_ [ width_ $ px 30
-                                       , height_ $ px 30
+                                        rect_ [ width_ $ px shipSize
+                                       , height_ $ px shipSize
                                        , x_ $ px (fst ship)
                                        , y_ $ px (snd ship)
-                                       , style_ $ M.fromList [ ("fill", "white")
+                                       , style_ $ M.fromList [ ("fill", "green")
                                                              , ("stroke", "black")
                                                              , ("stroke-width", "2")
                                                              ]
