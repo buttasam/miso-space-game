@@ -13,13 +13,14 @@ import Game
 import View
 import Update
 import Action
+import Model
 
 -- | Entry point for a miso application
 main :: IO ()
 main = startApp App {..}
   where
     initialAction = InitAction    -- initial action to be executed on application load
-    model         = 0             -- initial model
+    model         = NotStarted    -- initial model
     update        = updateModel   -- update function
     view          = viewModel     -- view function
     events        = defaultEvents -- default delegated events
