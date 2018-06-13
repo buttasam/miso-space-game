@@ -4,6 +4,8 @@
 
 module Update where
 
+import qualified Data.Set as Set
+
 -- | Miso framework import
 import Miso
 import Miso.String
@@ -16,5 +18,7 @@ updateModel :: Action -> Model -> Effect Action Model
 updateModel NoOp m = noEff m
 updateModel InitAction m = m <# do
   putStrLn "Test" >> pure NoOp
-updateModel (Tick _) m = m <# do
-  putStrLn "Ticked" >> pure NoOp
+updateModel (Tick _) m@(Started ship) = m <# do
+  putStrLn (show (fst ship)) >> pure NoOp
+updateModel (KeyboardPress keys) m@(Started s) =
+  noEff $ m { ship = ((fst s) + 1, (snd s)) }

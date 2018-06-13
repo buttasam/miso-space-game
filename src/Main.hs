@@ -32,9 +32,10 @@ main :: IO ()
 main = startApp App {..}
   where
     initialAction = InitAction    -- initial action to be executed on application load
-    model         = NotStarted    -- initial model
+    model         = Started initShip    -- initial model
     update        = updateModel   -- update function
     view          = viewModel     -- view function
-    events        = defaultEvents -- default delegated events
-    subs          = [every 100000 Tick]            -- empty subscription list
+    events        = defaultEvents -- deccfault delegated events
+    subs          = [keyboardSub KeyboardPress -- arrows + WASD
+                    ]            -- empty subscription list
     mountPoint    = Nothing       -- mount point for application (Nothing defaults to 'body')

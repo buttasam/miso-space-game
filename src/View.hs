@@ -33,8 +33,8 @@ rootBase content = div_ [] [ svg_ [ height_ $ px 600
 
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
-viewModel NotStarted = rootBase [ text_ [ x_ $ px (300)
-                                        , y_ $ px (300)
+viewModel (Started ship) = rootBase [ text_ [ x_ $ px (fst ship)
+                                        , y_ $ px (snd ship)
                                         , textStyle
                                         ] [ text "Press ENTER to start" ]
                                 ]
