@@ -25,7 +25,7 @@ foreign import javascript unsafe "$r = performance.now();"
 every :: Int -> (Double -> action) -> Sub action model
 every n f _ sink = void . forkIO . forever $ do
   threadDelay n
-  sink =<< f <$> now
+  sink =<< f <$> Main.now
 
 -- | Entry point for a miso application
 main :: IO ()
