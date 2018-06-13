@@ -10,4 +10,4 @@ executable app
   main-is:             Main.hs
   build-depends:       base, containers, miso, random
   default-language:    Haskell2010
-  other-modules:       Game, View
+  other-modules:       Game, Action, Model, Update, View

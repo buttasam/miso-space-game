@@ -7,14 +7,8 @@ module View where
 import Miso
 import Miso.String
 
--- | Type synonym for an application model
-type Model = Int
-
--- | Sum type for application events
-data Action
-  = InitAction
-  | NoOp
-  deriving (Show, Eq)
+import Action
+import Model
 
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
