@@ -5,6 +5,8 @@
 -- | Haskell module declaration
 module Main where
 
+import Control.Concurrent
+import Control.Monad
 -- | Miso framework import
 import Miso
 import Miso.String
@@ -15,6 +17,16 @@ import Update
 import Action
 import Model
 
+
+foreign import javascript unsafe "$r = performance.now();"
+  now :: IO Double
+
+-- | Utility for periodic tick subscriptions
+every :: Int -> (Double -> action) -> Sub action model
+every n f _ sink = void . forkIO . forever $ do
+  threadDelay n
+  sink =<< f <$> now
+
 -- | Entry point for a miso application
 main :: IO ()
 main = startApp App {..}
@@ -24,5 +36,5 @@ main = startApp App {..}
     update        = updateModel   -- update function
     view          = viewModel     -- view function
     events        = defaultEvents -- default delegated events
-    subs          = []            -- empty subscription list
+    subs          = [every 100000 Tick]            -- empty subscription list
     mountPoint    = Nothing       -- mount point for application (Nothing defaults to 'body')

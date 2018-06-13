@@ -16,3 +16,5 @@ updateModel :: Action -> Model -> Effect Action Model
 updateModel NoOp m = noEff m
 updateModel InitAction m = m <# do
   putStrLn "Test" >> pure NoOp
+updateModel (Tick _) m = m <# do
+  putStrLn "Ticked" >> pure NoOp
