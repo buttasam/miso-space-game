@@ -9,14 +9,8 @@ module Main where
 import Miso
 import Miso.String
 
--- | Type synonym for an application model
-type Model = Int
-
--- | Sum type for application events
-data Action
-  = InitAction
-  | NoOp
-  deriving (Show, Eq)
+import Game
+import View
 
 -- | Entry point for a miso application
 main :: IO ()
@@ -34,8 +28,4 @@ main = startApp App {..}
 updateModel :: Action -> Model -> Effect Action Model
 updateModel NoOp m = noEff m
 updateModel InitAction m = m <# do
-  putStrLn "Hello World" >> pure NoOp
-
--- | Constructs a virtual DOM from a model
-viewModel :: Model -> View Action
-viewModel x = div_ [] [ text "Miso space game" ]
+  putStrLn showText >> pure NoOp
