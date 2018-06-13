@@ -11,3 +11,9 @@ executable app
   build-depends:       base, containers, miso, random
   default-language:    Haskell2010
   other-modules:       Game, Action, Model, Update, View
+
+test-suite test-name
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             GameSpec.hs
+  build-depends:       base, hspec
