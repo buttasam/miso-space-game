@@ -24,3 +24,6 @@ screenSize = 600
 
 shipSize :: Integer
 shipSize = 30
+
+shipSpeed :: Integer
+shipSpeed = 5
