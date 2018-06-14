@@ -26,7 +26,10 @@ sanitizeEdges coord delta
 
 
 updateGame :: Model -> Model
-updateGame m@Started{..} = m { score = score + 1, shots = moveShots shots, enemies = filterLiveEnemies enemies shots }
+updateGame m@Started{..} = m { score = score + 1,
+                               shots = filterShots $ moveShots shots,
+                               enemies = filterLiveEnemies enemies shots
+                             }
 
 shoot :: Model -> Model
 shoot m@Started{..} = m { shots = [newShot] ++ shots }
@@ -35,6 +38,14 @@ shoot m@Started{..} = m { shots = [newShot] ++ shots }
 
 moveShots :: [Coords] -> [Coords]
 moveShots shots = map (\shot -> ((fst shot), (snd shot) - shotSpeed)) shots
+
+filterShots :: [Coords] -> [Coords]
+filterShots shots = filter (not . shotIsOut) shots
+
+shotIsOut :: Coords -> Bool
+shotIsOut shot = yShotMax < 0
+  where
+    yShotMax = (snd shot) + shotSize
 
 filterLiveEnemies :: [Coords] -> [Coords] -> [Coords]
 filterLiveEnemies enemies shots = filter (\e -> not (isEnemyKilled e shots)) enemies
