@@ -23,3 +23,7 @@ sanitizeEdges coord delta
   | newCoord > (screenSize - shipSize) = coord
   | otherwise = newCoord
     where newCoord = coord + delta
+
+
+updateGame :: Model -> Model
+updateGame m@Started{..} = m {ship = ship, score = score + 1, enemies = enemies}

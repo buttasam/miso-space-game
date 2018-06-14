@@ -20,7 +20,7 @@ updateModel NoOp m = noEff m
 updateModel InitAction m = m <# do
   putStrLn "Test" >> pure NoOp
 updateModel (Tick _) m@(Started ship score enemies) =
-  noEff $ m {ship = ship, score = score + 1, enemies = enemies}
+  noEff $ updateGame m
 updateModel (KeyboardPress keys) m@(Started ship score _)
   | Set.member 39 keys = noEff $ (moveShipLeft m)
   | Set.member 37 keys = noEff $ (moveShipRight m)
