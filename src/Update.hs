@@ -6,6 +6,8 @@ module Update where
 
 import qualified Data.Set as Set
 
+import System.Random
+
 -- | Miso framework import
 import Miso
 import Miso.String
@@ -16,11 +18,17 @@ import Game
 
 -- | Updates model, optionally introduces side effects
 updateModel :: Action -> Model -> Effect Action Model
+updateModel (Create rand) m = m <# do
+  putStrLn (show rand) >> pure NoOp
 updateModel NoOp m = noEff m
 updateModel InitAction m = m <# do
   putStrLn "Init" >> pure NoOp
 updateModel (Tick _) m =
-  noEff $ updateGame m
+                      let newModel = updateGame m
+                        in
+                        newModel <# do
+                        i <- randomRIO (0, 200)
+                        return $ Create i
 updateModel (KeyboardPress keys) m@Started{..}
   | Set.member 39 keys = noEff $ moveShipLeft m
   | Set.member 37 keys = noEff $ moveShipRight m
