@@ -1,18 +1,20 @@
+{-# LANGUAGE RecordWildCards #-}
+
 module Game where
 
 import Model
 
 moveShipLeft :: Model -> Model
-moveShipLeft m@(Started ship score enemies) = m { ship = (sanitizeEdges (fst ship) shipSpeed, (snd ship)), score = score, enemies = enemies }
+moveShipLeft m@Started{..} = m { ship = (sanitizeEdges (fst ship) shipSpeed, (snd ship)) }
 
 moveShipRight :: Model -> Model
-moveShipRight  m@(Started ship score enemies) = m { ship = (sanitizeEdges (fst ship) (-shipSpeed), (snd ship)), score = score, enemies = enemies }
+moveShipRight  m@Started{..} = m { ship = (sanitizeEdges (fst ship) (-shipSpeed), (snd ship)) }
 
 moveShipUp :: Model -> Model
-moveShipUp m@(Started ship score enemies) = m { ship = ((fst ship), sanitizeEdges (snd ship) (-shipSpeed)), score = score, enemies = enemies }
+moveShipUp m@Started{..} = m { ship = ((fst ship), sanitizeEdges (snd ship) (-shipSpeed)) }
 
 moveShipDown :: Model -> Model
-moveShipDown m@(Started ship score enemies) = m { ship = ((fst ship), sanitizeEdges (snd ship) shipSpeed), score = score, enemies = enemies }
+moveShipDown m@Started{..} = m { ship = ((fst ship), sanitizeEdges (snd ship) shipSpeed) }
 
 
 sanitizeEdges :: Integer -> Integer -> Integer
