@@ -13,13 +13,6 @@ import qualified Data.Map as M
 import Action
 import Model
 
-textStyle :: Attribute a
-textStyle = style_ $ M.fromList [ ("fill", "red")
-                                , ("stroke", "red")
-                                , ("font-size", "20px")
-                                , ("text-anchor", "left")
-                                ]
-
 px :: Show a => a -> MisoString
 px e = ms $ show e ++ "px"
 
@@ -34,28 +27,43 @@ rootBase content = div_ [] [ svg_ [ height_ $ px screenSize
 
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
-viewModel Started{..} = rootBase [ text_ [ x_ $ px 10
-                                        , y_ $ px 20
-                                        , textStyle
-                                        ] [ text scoreText],
+viewModel Started{..} = rootBase [ renderScore score,
+                                   renderShip ship,
+                                   renderShot (230, 342)
+                                 ]
 
-                                        rect_ [ width_ $ px shipSize
-                                       , height_ $ px shipSize
-                                       , x_ $ px (fst ship)
-                                       , y_ $ px (snd ship)
-                                       , style_ $ M.fromList [ ("fill", "green")
-                                                             , ("stroke", "black")
-                                                             , ("stroke-width", "2")
-                                                             ]
-                                       ] [],
-                                       renderShot (230, 342)
-                                ]
-      where scoreText = ms ("Score: "  ++ (show score))
 
 {-
 renderShots :: Model -> [Element]
 renderShots Started{..} = map shotToRec shots
 -}
+
+renderScore :: Integer -> View Action
+renderScore score = text_ [ x_ $ px 10
+                          , y_ $ px 20
+                          , style
+                          ] [ text scoreText]
+  where
+    scoreText = ms ("Score: "  ++ (show score))
+    style = style_ $ M.fromList [ ("fill", "red")
+                                    , ("stroke", "red")
+                                    , ("font-size", "20px")
+                                    , ("text-anchor", "left")
+                                    ]
+
+
+renderShip :: Coords -> View Action
+renderShip ship = rect_ [  width_ $ px shipSize
+                    , height_ $ px shipSize
+                    , x_ $ px (fst ship)
+                    , y_ $ px (snd ship)
+                    , style
+                    ] []
+    where
+      style = style_ $ M.fromList [  ("fill", "green")
+                                   , ("stroke", "black")
+                                   , ("stroke-width", "2")
+                                   ]
 
 renderShot :: Coords -> View Action
 renderShot shot = rect_ [ width_ $ px 10
