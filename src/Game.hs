@@ -28,7 +28,7 @@ sanitizeEdges coord delta
 updateGame :: Model -> Model
 updateGame m@Started{..} = m { score = score + 1,
                                shots = filterShots $ moveShots shots,
-                               enemies = filterLiveEnemies (moveEnemies enemies) shots
+                               enemies = filterLiveEnemies (moveEnemies enemies score) shots
                              }
 
 shoot :: Model -> Model
@@ -38,8 +38,8 @@ shoot m@Started{..} = m { shots = [newShot] ++ shots }
 createEnemy :: Model -> Int -> Model
 createEnemy m@Started{..} rand = m { enemies = [(toInteger rand, 0)] ++ enemies }
 
-moveEnemies :: [Coords] -> [Coords]
-moveEnemies enemies = map (\enemy -> ((fst enemy), (snd enemy) + enemySpeed)) enemies
+moveEnemies :: [Coords] -> Integer -> [Coords]
+moveEnemies enemies score = map (\enemy -> ((fst enemy), (snd enemy) + (enemySpeed score))) enemies
 
 moveShots :: [Coords] -> [Coords]
 moveShots shots = map (\shot -> ((fst shot), (snd shot) - shotSpeed)) shots
