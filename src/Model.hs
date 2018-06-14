@@ -21,6 +21,8 @@ initShip = ((screenSize `div` 2) - halfOfShip, screenSize - 3 * halfOfShip)
 initShot :: Coords -> Coords
 initShot ship = ((fst ship) + (shipSize `div` 2) - (shotSize `div` 2), (snd ship))
 
+initEnemies :: [Coords]
+initEnemies = [(100, 70), (200, 150), (300, 80)]
 
 initScore :: Integer
 initScore = 0

@@ -32,7 +32,7 @@ main :: IO ()
 main = startApp App {..}
   where
     initialAction = InitAction    -- initial action to be executed on application load
-    model         = Started initShip initScore [] []  -- initial model
+    model         = Started initShip initScore [] initEnemies -- initial model
     update        = updateModel   -- update function
     view          = viewModel     -- view function
     events        = defaultEvents -- deccfault delegated events
