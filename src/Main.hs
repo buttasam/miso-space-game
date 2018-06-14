@@ -37,5 +37,5 @@ main = startApp App {..}
     view          = viewModel     -- view function
     events        = defaultEvents -- deccfault delegated events
     subs          = [keyboardSub KeyboardPress -- arrows + WASD
-                     ,every 100000 Tick]            -- empty subscription list
+                     ,every 50000 Tick]            -- empty subscription list
     mountPoint    = Nothing       -- mount point for application (Nothing defaults to 'body')

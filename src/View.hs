@@ -27,10 +27,8 @@ rootBase content = div_ [] [ svg_ [ height_ $ px screenSize
 
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
-viewModel m@Started{..} = rootBase ([ renderScore score,
-                                   renderShip ship ] ++ renderShots m)
-
-
+viewModel m@Started{..} = rootBase (renderShots m ++ [ renderScore score,
+                                   renderShip ship ])
 
 renderShots :: Model -> [View Action]
 renderShots Started{..} = map renderShot shots
@@ -63,8 +61,8 @@ renderShip ship = rect_ [  width_ $ px shipSize
                                    ]
 
 renderShot :: Coords -> View Action
-renderShot shot = rect_ [ width_ $ px 10
-                  , height_ $ px 10
+renderShot shot = rect_ [ width_ $ px shotSize
+                  , height_ $ px shotSize
                   , x_ $ px (fst shot)
                   , y_ $ px (snd shot)
                   , style_ $ M.fromList [ ("fill", "green")

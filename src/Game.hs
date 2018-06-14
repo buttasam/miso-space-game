@@ -26,8 +26,12 @@ sanitizeEdges coord delta
 
 
 updateGame :: Model -> Model
-updateGame m@Started{..} = m { score = score + 1 }
+updateGame m@Started{..} = m { score = score + 1, shots = moveShots shots }
 
 shoot :: Model -> Model
 shoot m@Started{..} = m { shots = [newShot] ++ shots }
-  where newShot = ((fst ship), (snd ship))
+  where newShot = initShot ship
+
+
+moveShots :: [Coords] -> [Coords]
+moveShots shots = map (\shot -> ((fst shot), (snd shot) - shotSpeed)) shots
