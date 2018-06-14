@@ -47,3 +47,6 @@ shotSize = 10
 
 enemySize :: Integer
 enemySize = 40
+
+enemySpeed :: Integer
+enemySpeed = 3
