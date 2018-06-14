@@ -1,6 +1,7 @@
 -- | Haskell language pragma
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module View where
 
@@ -33,7 +34,7 @@ rootBase content = div_ [] [ svg_ [ height_ $ px screenSize
 
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
-viewModel (Started ship score enemies) = rootBase [ text_ [ x_ $ px 10
+viewModel Started{..} = rootBase [ text_ [ x_ $ px 10
                                         , y_ $ px 20
                                         , textStyle
                                         ] [ text scoreText],
@@ -46,6 +47,23 @@ viewModel (Started ship score enemies) = rootBase [ text_ [ x_ $ px 10
                                                              , ("stroke", "black")
                                                              , ("stroke-width", "2")
                                                              ]
-                                       ] []
+                                       ] [],
+                                       renderShot (230, 342)
                                 ]
       where scoreText = ms ("Score: "  ++ (show score))
+
+{-
+renderShots :: Model -> [Element]
+renderShots Started{..} = map shotToRec shots
+-}
+
+renderShot :: Coords -> View Action
+renderShot shot = rect_ [ width_ $ px 10
+                  , height_ $ px 10
+                  , x_ $ px (fst shot)
+                  , y_ $ px (snd shot)
+                  , style_ $ M.fromList [ ("fill", "green")
+                                       , ("stroke", "black")
+                                       , ("stroke-width", "2")
+                                       ]
+                  ] []

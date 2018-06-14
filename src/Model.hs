@@ -4,16 +4,17 @@ module Model where
 data Model
   = NotStarted
   | Started
-    { ship :: Ship,
+    { ship :: Coords,
       score :: Integer,
-      enemies :: [Ship]
+      enemies :: [Coords],
+      shots :: [Coords]
     }
   deriving (Show, Eq)
 
-type Ship = (Integer, Integer)
+type Coords = (Integer, Integer)
 
 -- | Define constants and init data
-initShip :: Ship
+initShip :: Coords
 initShip = ((screenSize `div` 2) - halfOfShip, screenSize - 3 * halfOfShip)
     where halfOfShip = shipSize `div` 2
 
