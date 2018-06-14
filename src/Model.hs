@@ -24,6 +24,9 @@ initShot ship = ((fst ship) + (shipSize `div` 2) - (shotSize `div` 2), (snd ship
 initEnemies :: [Coords]
 initEnemies = [(100, 70), (200, 150), (300, 80)]
 
+initShots :: [Coords]
+initShots = []
+
 initScore :: Integer
 initScore = 0
 
