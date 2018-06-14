@@ -22,7 +22,7 @@ initShot :: Coords -> Coords
 initShot ship = ((fst ship) + (shipSize `div` 2) - (shotSize `div` 2), (snd ship))
 
 initEnemies :: [Coords]
-initEnemies = [(100, 70), (200, 150), (300, 80)]
+initEnemies = [(100, -20), (300, -10), (480, -35)]
 
 initShots :: [Coords]
 initShots = []

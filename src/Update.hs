@@ -18,8 +18,7 @@ import Game
 
 -- | Updates model, optionally introduces side effects
 updateModel :: Action -> Model -> Effect Action Model
-updateModel (Create rand) m = m <# do
-  putStrLn (show rand) >> pure NoOp
+updateModel (Create rand) m@Started{..} = noEff $ if (score `mod` 50 == 0) then createEnemy m rand else m
 updateModel NoOp m = noEff m
 updateModel InitAction m = m <# do
   putStrLn "Init" >> pure NoOp
@@ -27,7 +26,7 @@ updateModel (Tick _) m =
                       let newModel = updateGame m
                         in
                         newModel <# do
-                        i <- randomRIO (0, 200)
+                        i <- randomRIO (0, fromInteger (screenSize - enemySize))
                         return $ Create i
 updateModel (KeyboardPress keys) m@Started{..}
   | Set.member 39 keys = noEff $ moveShipLeft m

@@ -35,6 +35,9 @@ shoot :: Model -> Model
 shoot m@Started{..} = m { shots = [newShot] ++ shots }
   where newShot = initShot ship
 
+createEnemy :: Model -> Int -> Model
+createEnemy m@Started{..} rand = m { enemies = [(toInteger rand, 0)] ++ enemies }
+
 moveEnemies :: [Coords] -> [Coords]
 moveEnemies enemies = map (\enemy -> ((fst enemy), (snd enemy) + enemySpeed)) enemies
 
