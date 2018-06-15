@@ -32,6 +32,15 @@ viewModel m@Started{..} = rootBase (renderEnemies m ++
                                     renderScore score,
                                     renderShip ship
                                     ])
+viewModel GameOver = rootBase [ text_ [ x_ $ px ((screenSize `div` 2) - 50)
+                                        , y_ $ px (screenSize `div` 2)
+                                        , style
+                                      ] [ text "Game over" ]
+                              ]
+            where
+              style = style_ $ M.fromList [ ("fill", "red")
+                                          , ("font-size", "30px")
+                                          , ("text-anchor", "left") ]
 
 renderEnemies :: Model -> [View Action]
 renderEnemies Started{..} = map renderEnemy enemies

@@ -26,10 +26,12 @@ sanitizeEdges coord delta
 
 
 updateGame :: Model -> Model
-updateGame m@Started{..} = m { score = score + 1,
-                               shots = filterShots $ moveShots shots,
-                               enemies = filterLiveEnemies (moveEnemies enemies score) shots
-                             }
+updateGame m@Started{..}
+  | isGameOver enemies = GameOver
+  | otherwise =  m { score = score + 1,
+                     shots = filterShots $ moveShots shots,
+                     enemies = filterLiveEnemies (moveEnemies enemies score) shots
+                   }
 
 shoot :: Model -> Model
 shoot m@Started{..} = m { shots = [newShot] ++ shots }
@@ -59,7 +61,7 @@ isEnemyKilled :: Coords -> [Coords] -> Bool
 isEnemyKilled enemy shots = not . null $ filter (\s -> enemyShotIntersect enemy s) shots
 
 isGameOver :: [Coords] -> Bool
-isGameOver enemies = not . null $ filter (\e -> (snd e) > screenSize) enemies
+isGameOver enemies = not . null $ filter (\e -> (snd e) > (screenSize- enemySize)) enemies
 
 enemyShotIntersect :: Coords -> Coords -> Bool
 enemyShotIntersect enemy shot = (yEnemyMax > yShotMin) && (xEnemyMax > xShotMin) && (yEnemyMin < yShotMax) && (xEnemyMin < xShotMax)
