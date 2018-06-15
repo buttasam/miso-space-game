@@ -56,10 +56,10 @@ filterLiveEnemies :: [Coords] -> [Coords] -> [Coords]
 filterLiveEnemies enemies shots = filter (\e -> not (isEnemyKilled e shots)) enemies
 
 isEnemyKilled :: Coords -> [Coords] -> Bool
-isEnemyKilled enemy shots = (length (filter (\s -> enemyShotIntersect enemy s) shots)) /= 0
+isEnemyKilled enemy shots = not . null $ filter (\s -> enemyShotIntersect enemy s) shots
 
 isGameOver :: [Coords] -> Bool
-isGameOver enemies = (length (filter (\e -> (snd e) > screenSize) enemies)) /= 0
+isGameOver enemies = not . null $ filter (\e -> (snd e) > screenSize) enemies
 
 enemyShotIntersect :: Coords -> Coords -> Bool
 enemyShotIntersect enemy shot = (yEnemyMax > yShotMin) && (xEnemyMax > xShotMin) && (yEnemyMin < yShotMax) && (xEnemyMin < xShotMax)
