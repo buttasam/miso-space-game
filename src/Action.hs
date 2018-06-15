@@ -9,6 +9,6 @@ data Action
   = InitAction
   | Tick !Double
   | KeyboardPress !(Set.Set Int)
-  | Create !Int
+  | Create !(Int, Int)
   | NoOp
   deriving (Show, Eq)

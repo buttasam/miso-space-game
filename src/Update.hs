@@ -7,6 +7,7 @@ module Update where
 import qualified Data.Set as Set
 
 import System.Random
+import Control.Monad
 
 -- | Miso framework import
 import Miso
@@ -18,7 +19,7 @@ import Game
 
 -- | Updates model, optionally introduces side effects
 updateModel :: Action -> Model -> Effect Action Model
-updateModel (Create rand) m@Started{..} = noEff $ if (score `mod` 50 == 0) then createEnemy m rand else m
+updateModel (Create (r1, r2)) m@Started{..} = noEff $ if (r1 < 3) then createEnemy m r2 else m
 updateModel NoOp m = noEff m
 updateModel InitAction m = m <# do
   putStrLn "Init" >> pure NoOp
@@ -26,8 +27,9 @@ updateModel (Tick _) m =
                       let newModel = updateGame m
                         in
                         newModel <# do
-                        i <- randomRIO (0, fromInteger (screenSize - enemySize))
-                        return $ Create i
+                        i <-randomRIO (1, 100)
+                        j <-randomRIO (0, fromInteger (screenSize - enemySize))
+                        return $ Create (i,j)
 updateModel (KeyboardPress keys) m@Started{..}
   | Set.member 39 keys = noEff $ moveShipLeft m
   | Set.member 37 keys = noEff $ moveShipRight m
