@@ -57,5 +57,6 @@ shotSize = 10
 enemySize :: Integer
 enemySize = 40
 
-enemySpeed :: Integer -> Integer
-enemySpeed score = (score `div` 200) + 1
+-- | Calculate enemy speed depends on score
+calculateEnemySpeed :: Integer -> Integer
+calculateEnemySpeed score = (score `div` 200) + 1

@@ -44,7 +44,7 @@ updateGame m@Started{..}
   | isGameOver enemies = GameOver score
   | otherwise =  m { score = score + 1,
                      shots = filterShots $ moveShots shots,
-                     enemies = filterLiveEnemies (moveEnemies enemies score) shots
+                     enemies = filterLiveEnemies (moveEnemies enemies $ calculateEnemySpeed score) shots
                    }
 
 -- | Add new shot to the list of shots.
@@ -58,7 +58,7 @@ createEnemy m@Started{..} rand = m { enemies = [(toInteger rand, -enemySize)] ++
 
 -- | Move enemies by incrementing second coordinate.
 moveEnemies :: [Coords] -> Integer -> [Coords]
-moveEnemies enemies score = map (\enemy -> ((fst enemy), (snd enemy) + (enemySpeed score))) enemies
+moveEnemies enemies speed = map (\enemy -> ((fst enemy), (snd enemy) + speed)) enemies
 
 -- | Move shots by decrementing second coordinate.
 moveShots :: [Coords] -> [Coords]
