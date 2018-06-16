@@ -3,6 +3,13 @@ Simple space game in Haskell ([Miso frontend framework](https://haskell-miso.org
 
 ![GitHub Logo](/img/screen1.png)
 
+## Setup
+Please follow instructions for [Miso stack project](https://github.com/dmjio/miso#stack).
+
+- Build project `stack build`.
+- Run tests with `stack test`.
+- Generate documentation with `stack haddock`.
+
 ## Control
 
 - Move up, down, left and right with arrows
