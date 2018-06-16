@@ -27,7 +27,7 @@ sanitizeEdges coord delta
 
 updateGame :: Model -> Model
 updateGame m@Started{..}
-  | isGameOver enemies = GameOver
+  | isGameOver enemies = GameOver score
   | otherwise =  m { score = score + 1,
                      shots = filterShots $ moveShots shots,
                      enemies = filterLiveEnemies (moveEnemies enemies score) shots

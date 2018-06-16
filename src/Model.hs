@@ -2,7 +2,7 @@ module Model where
 
 -- | Type synonym for an application model
 data Model
-  = GameOver
+  = GameOver { score :: Integer}
   | Started
     { ship :: Coords,
       score :: Integer,

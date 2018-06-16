@@ -32,10 +32,10 @@ viewModel m@Started{..} = rootBase (renderEnemies m ++
                                     renderScore score,
                                     renderShip ship
                                     ])
-viewModel GameOver = rootBase [ text_ [ x_ $ px ((screenSize `div` 2) - 50)
+viewModel (GameOver score) = rootBase [ text_ [ x_ $ px ((screenSize `div` 2) - 100)
                                         , y_ $ px (screenSize `div` 2)
                                         , style
-                                      ] [ text "Game over" ]
+                                      ] [ text $ ms ("Game over: "  ++ (show score)) ]
                               ]
             where
               style = style_ $ M.fromList [ ("fill", "red")
