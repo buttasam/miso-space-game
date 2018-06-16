@@ -26,16 +26,24 @@ spec = do
     it "correct move enemies" $ do
       (moveEnemies [(200, 300), (100, 500)] 2) `shouldBe` [(200, 302), (100, 502)]
 
-{-
   describe "filterShots" $ do
-    it "game not over" $ do
-      (isGameOver [(200, 300), (100, 500)]) `shouldBe` False
+    it "zero shots" $ do
+      (filterShots []) `shouldBe` []
+    it "one out of screen" $ do
+      (filterShots [(200, 300), (100, -100)]) `shouldBe` [(200, 300)]
+    it "all in screen" $ do
+      (filterShots [(200, 300), (100, 500)]) `shouldBe` [(200, 300), (100, 500)]
 
-  describe "filterLiveEnemies" $ do
-    it "game not over" $ do
-      (isGameOver [(200, 300), (100, 500)]) `shouldBe` False
+  describe "filter live enemies" $ do
+    it "zero shots zero enemies" $ do
+      (filterLiveEnemies [] []) `shouldBe` []
+    it "zero shots one enemy" $ do
+      (filterLiveEnemies [(100, 300)] []) `shouldBe` [(100, 300)]
+    it "filter one " $ do
+      (filterLiveEnemies [(100, 300)] [(105, 299 + enemySize)]) `shouldBe` []
 
-  describe "enemyShotIntersect" $ do
-    it "game not over" $ do
-      (isGameOver [(200, 300), (100, 500)]) `shouldBe` False
--}
+  describe "enemy intersects with shot" $ do
+    it "shot intersects" $ do
+      (enemyShotIntersect (200, 300) (210, 310)) `shouldBe` True
+    it "shot does not intersect" $ do
+      (enemyShotIntersect (200, 300) (400, 500)) `shouldBe` False
