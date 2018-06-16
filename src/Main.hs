@@ -1,13 +1,20 @@
--- | Haskell language pragma
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
--- | Haskell module declaration
+{-|
+Module      : Main
+Description : Main module
+Copyright   : (c) Samuel Butta, 2018
+License     : MIT
+Maintainer  : samuel@butta.cz
+
+Starting point of application.
+-}
 module Main where
 
 import Control.Concurrent
 import Control.Monad
--- | Miso framework import
+
 import Miso
 import Miso.String
 

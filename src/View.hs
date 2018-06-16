@@ -3,6 +3,15 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE RecordWildCards #-}
 
+{-|
+Module      : View
+Description : Defines render functions
+Copyright   : (c) Samuel Butta, 2018
+License     : MIT
+Maintainer  : samuel@butta.cz
+
+Defines render functions.
+-}
 module View where
 
 import Miso

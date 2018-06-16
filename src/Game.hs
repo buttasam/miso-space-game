@@ -1,5 +1,14 @@
 {-# LANGUAGE RecordWildCards #-}
 
+{-|
+Module      : Game
+Description : Game login module
+Copyright   : (c) Samuel Butta, 2018
+License     : MIT
+Maintainer  : samuel@butta.cz
+
+Defines game logic.
+-}
 module Game where
 
 import Model

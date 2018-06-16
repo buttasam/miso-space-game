@@ -2,6 +2,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
+{-|
+Module      : Update
+Description : Updates model
+Copyright   : (c) Samuel Butta, 2018
+License     : MIT
+Maintainer  : samuel@butta.cz
+
+Define application update model.
+-}
 module Update where
 
 import qualified Data.Set as Set

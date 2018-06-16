@@ -1,3 +1,12 @@
+{-|
+Module      : Model
+Description : Define application model
+Copyright   : (c) Samuel Butta, 2018
+License     : MIT
+Maintainer  : samuel@butta.cz
+
+Define application model, constants and init functions.
+-}
 module Model where
 
 -- | Type synonym for an application model
