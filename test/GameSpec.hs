@@ -14,8 +14,28 @@ spec = do
     it "returns value in ege" $
       (sanitizeEdges 0 (-5)) `shouldBe` 0
 
-  describe "isGameOver" $ do
+  describe "is game over" $ do
     it "game not over" $ do
       (isGameOver [(200, 300), (100, 500)]) `shouldBe` False
     it "game not over" $
       (isGameOver [(200, 300), (100, screenSize + 1)]) `shouldBe` True
+
+  describe "move enemies" $ do
+    it "zero enemies" $ do
+      (moveEnemies [] 2) `shouldBe` []
+    it "correct move enemies" $ do
+      (moveEnemies [(200, 300), (100, 500)] 2) `shouldBe` [(200, 302), (100, 502)]
+
+{-
+  describe "filterShots" $ do
+    it "game not over" $ do
+      (isGameOver [(200, 300), (100, 500)]) `shouldBe` False
+
+  describe "filterLiveEnemies" $ do
+    it "game not over" $ do
+      (isGameOver [(200, 300), (100, 500)]) `shouldBe` False
+
+  describe "enemyShotIntersect" $ do
+    it "game not over" $ do
+      (isGameOver [(200, 300), (100, 500)]) `shouldBe` False
+-}
