@@ -9,6 +9,7 @@ Please follow instructions for [Miso stack project](https://github.com/dmjio/mis
 - Build project `stack build`.
 - Run tests with `stack test`.
 - Generate documentation with `stack haddock`.
+- Last build of application is in `dist` directory
 
 ## Control
 
