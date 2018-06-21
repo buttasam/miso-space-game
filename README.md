@@ -1,6 +1,8 @@
 # Miso space game
 Simple space game in Haskell ([Miso frontend framework](https://haskell-miso.org/))
 
+You can [play it here](https://buttasam.github.io/miso-space-game/dist/index.html).
+
 ![GitHub Logo](/img/screen1.png)
 
 ## Setup
